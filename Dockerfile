@@ -1,6 +1,6 @@
 FROM phusion/baseimage:0.9.11
 # https://github.com/phusion/baseimage-docker
-MAINTAINER Nguyen Ngoc Tu <axitn@gmail.com>
+MAINTAINER Nguyen Ngoc Tu <axitdn@gmail.com>
 
 ENV HOME /root
 RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
