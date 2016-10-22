@@ -12,7 +12,8 @@ CMD ["/sbin/my_init"]
 RUN apt-get update \
   && apt-get install -y ruby gems g++ ruby-dev libcurl3 libcurl3-gnutls \
   libcurl4-openssl-dev imagemagick default-jre inkscape phantomjs \
-  calibre texlive-full nodejs
+  calibre nodejs
+RUN apt-get install -y texlive-full texlive-lang-vietnamese
 
 # nodejs => node
 RUN cd /usr/local/bin && ln -s /usr/bin/nodejs node
@@ -41,6 +42,7 @@ RUN curl -LO \
 RUN apt-get install -y libxslt-dev libxml2-dev build-essential
 RUN gem install softcover --pre --no-ri --no-rdoc
 
+RUN apt-get install -y biber
 # ==============================================================================
 # Health check
 # ==============================================================================
@@ -53,6 +55,10 @@ RUN mkdir /book
 WORKDIR /book
 
 ENV PATH="$HOME/bin:$PATH"
+
+RUN sudo dpkg-reconfigure locales
+ENV LC_CTYPE=en_US.UTF-8
+ENV LANG=en_US.UTF-8
 
 EXPOSE 4000
 
